@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/discovery"
+        android:title="Discovery"
+        android:icon="@drawable/ic_baseline_location" />
+
+    <item
+        android:id="@+id/directory"
+        android:title="Directory"
+        android:icon="@drawable/ic_baseline_list" />
+
+    <item
+        android:id="@+id/favorite"
+        android:title="Favorite"
+        android:icon="@drawable/ic_baseline_favorite" />
+
+    <item
+        android:id="@+id/profile"
+        android:title="Profile"
+        android:icon="@drawable/ic_baseline_account" />
+
+    <item
+        android:id="@+id/notification"
+        android:title="Notification"
+        android:icon="@drawable/ic_baseline_notifications" />
+
+</menu>
