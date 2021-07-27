@@ -4,17 +4,59 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.slider.Slider;
 
 public class Profile extends AppCompatActivity {
+
+    private boolean mIsEnabled;
+    private GeofenceHelper mGeofencing;
+    Slider slider;
+    private static final String TAG = "Profile";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
+        this.setTitle("Profile Settings");
+
+
+        Switch onOffSwitch = (Switch) findViewById(R.id.enable_switch);
+        mIsEnabled = getPreferences(MODE_PRIVATE).getBoolean(getString(R.string.setting_enabled), false);
+        onOffSwitch.setChecked(mIsEnabled);
+        onOffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
+                editor.putBoolean(getString(R.string.setting_enabled), isChecked);
+                mIsEnabled = isChecked;
+                editor.commit();
+                if (isChecked) GeofenceHelper.registerAllGeofences();
+                else GeofenceHelper.unRegisterAllGeofences();
+            }
+
+        });
+
+        slider = findViewById(R.id.radiusSlider);
+        slider.addOnChangeListener(new Slider.OnChangeListener() {
+            float radiusSliderValue = 80;
+            @Override
+            public void onValueChange(Slider slider, float value, boolean fromUser) {
+                radiusSliderValue = value;
+                if (radiusSliderValue!=0) GeofenceHelper.setGeofenceRadius(radiusSliderValue);
+                Log.d(TAG, "onValueChange: slider: " + radiusSliderValue);
+            }
+        });
+
 
         //Initialize and Assign Variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -29,7 +71,7 @@ public class Profile extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.discovery:
                         startActivity(new Intent(getApplicationContext(),
-                                MainActivity.class));
+                                MapsActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.directory:
