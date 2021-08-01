@@ -2,6 +2,7 @@ package com.sp.foodplaces;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,10 +12,23 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Directory extends AppCompatActivity {
 
+    FragmentManager fragmentManager;
+    FavFragment favFragment = new FavFragment();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.setTitle("Directory");
         setContentView(R.layout.activity_directory);
+
+        //getSupportFragmentManager().beginTransaction().replace(R.id.notificationContainer, new NotificationFragment()).commit();
+        fragmentManager = getSupportFragmentManager();
+        fragmentManager
+                .beginTransaction()
+                .add(R.id.directoryContainer,favFragment)
+                .show(favFragment)
+                .commit();
+
 
         //Initialize and Assign Variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);

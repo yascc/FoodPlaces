@@ -37,24 +37,6 @@ public class NotificationFragment extends Fragment {
     // Required empty public constructor
     }
 
-    // TODO: Rename and change types and number of parameters
-    /*public static NotificationFragment newInstance(String param1, String param2) {
-        NotificationFragment fragment = new NotificationFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }*/
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -84,12 +66,6 @@ public class NotificationFragment extends Fragment {
 
         notificationsRV.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        /* //notificationsList = new ArrayList<>();
-       notificationsList.add(new ModelNotification(R.drawable.ic_baseline_notifications, "Iron Man1", "5 Star Restaurant is near you!","Enter Geofence"));
-        notificationsList.add(new ModelNotification(R.drawable.ic_baseline_notifications,"Hulk2", "5 Star Restaurant is near you!","Enter Geofence"));
-*/
-
-//        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         notificationsRV.setAdapter(new AdaptorNotification(notificationsList));
 

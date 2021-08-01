@@ -7,14 +7,6 @@
     android:id="@+id/notificationContainer"
     tools:context=".Notification">
 
- <!--   <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Notification"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true" />-->
-
 
     <View
         android:layout_width="match_parent"

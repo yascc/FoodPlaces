@@ -20,9 +20,6 @@ import java.util.List;
 
 public class Notification extends AppCompatActivity {
 
-/*    RecyclerView notificationsRV;
-    AdaptorNotification notificationAdaptor;
-    ArrayList<ModelNotification> notificationsList;*/
 
     FragmentManager fragmentManager;
     NotificationFragment notificationFragment = new NotificationFragment();
