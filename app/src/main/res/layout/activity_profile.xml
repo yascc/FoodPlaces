@@ -9,94 +9,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="24dp"
+        android:layout_centerInParent="false"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
+        android:layout_marginBottom="24dp"
         android:orientation="vertical">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
-        android:text="@string/settings_label"
-        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-        android:textColor="@color/colorPrimaryDark" />
-
-    <View
-        android:layout_width="fill_parent"
-        android:layout_height="2dip"
-        android:layout_marginTop="4dp"
-        android:background="@color/colorPrimary" />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="8dp">
-
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:paddingBottom="4dp"
-            android:paddingRight="8dp"
-            android:paddingTop="4dp"
-            android:src="@drawable/ic_baseline_notifications" />
-
-        <Switch
-            android:id="@+id/enable_switch"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:text="@string/enable_geofences"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
-    </LinearLayout>
-
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:paddingTop="4dp">
-
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="4dp"
-                android:paddingRight="8dp"
-                android:paddingTop="8dp"
-                android:src="@drawable/ic_baseline_my_location" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:text="@string/location_radius"
-                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-                android:textColor="@android:color/black" />
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <com.google.android.material.slider.Slider
-                   android:id="@+id/radiusSlider"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:value="80"
-                    android:stepSize="10"
-                    android:valueFrom="30"
-                    android:valueTo="120"
-                    android:layout_centerInParent="true"
-                    />
-
-            </RelativeLayout>
-        </LinearLayout>
-
         <TextView
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Other Settings"
+            android:text="Non Member / Guest"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/colorPrimaryDark" />
 
@@ -106,16 +29,71 @@
             android:layout_marginTop="4dp"
             android:background="@color/colorPrimary" />
 
+        <Button
+            android:id="@+id/goToGuest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Continue As Guest" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="4dp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="Existing Member"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dip"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorPrimary" />
+
+        <Button
+            android:id="@+id/gotoLogin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="4dp">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:text="New Member"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="@color/colorPrimaryDark" />
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="2dip"
+            android:layout_marginTop="4dp"
+            android:background="@color/colorPrimary" />
+
+        <Button
+            android:id="@+id/goToRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Register" />
+
 
     </LinearLayout>
-
-<!--    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Profile"
-        android:textSize="50sp"
-        android:textStyle="bold"
-        android:layout_centerInParent="true" />-->
 
     <View
         android:layout_width="match_parent"
