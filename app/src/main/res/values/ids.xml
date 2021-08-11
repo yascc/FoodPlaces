@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <item name="goToGuest" type="id" />
+    <item name="enable_switch" type="id" />
+    <item name="radiusSlider" type="id" />
 </resources>
