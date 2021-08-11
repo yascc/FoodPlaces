@@ -40,5 +40,4 @@
         <activity android:name=".Login"/>
     </application>
 
-    //test to push m1515m
 </manifest>
