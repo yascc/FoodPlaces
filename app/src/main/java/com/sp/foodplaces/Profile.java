@@ -4,56 +4,52 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
-import android.widget.CompoundButton;
-import android.widget.Switch;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
 
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.LocationServices;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.slider.Slider;
+import com.google.api.Context;
 
 public class Profile extends AppCompatActivity {
-
-    private boolean mIsEnabled;
-    private GeofenceHelper mGeofencing;
-    Slider slider;
+    boolean valid = true;
     private static final String TAG = "Profile";
+    Button goToRegister,goToLogin,goToGuest;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
-        this.setTitle("Profile Settings");
+        this.setTitle("Profile");
+
+        goToRegister = findViewById(R.id.gotoRegister);
+        goToLogin = findViewById(R.id.gotoLogin);
+        goToGuest = findViewById(R.id.goToGuest);
 
 
-        Switch onOffSwitch = (Switch) findViewById(R.id.enable_switch);
-        mIsEnabled = getPreferences(MODE_PRIVATE).getBoolean(getString(R.string.setting_enabled), false);
-        onOffSwitch.setChecked(mIsEnabled);
-        onOffSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+        goToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                SharedPreferences.Editor editor = getPreferences(MODE_PRIVATE).edit();
-                editor.putBoolean(getString(R.string.setting_enabled), isChecked);
-                mIsEnabled = isChecked;
-                editor.commit();
-                if (isChecked) GeofenceHelper.registerAllGeofences();
-                else GeofenceHelper.unRegisterAllGeofences();
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),Register.class));
+                //finish();
             }
-
         });
 
-        slider = findViewById(R.id.radiusSlider);
-        slider.addOnChangeListener(new Slider.OnChangeListener() {
-            float radiusSliderValue = 80;
+        goToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onValueChange(Slider slider, float value, boolean fromUser) {
-                radiusSliderValue = value;
-                if (radiusSliderValue!=0) GeofenceHelper.setGeofenceRadius(radiusSliderValue);
-                Log.d(TAG, "onValueChange: slider: " + radiusSliderValue);
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),Login.class));
+                //finish();
+            }
+        });
+
+        goToGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                finish();
             }
         });
 
@@ -85,6 +81,9 @@ public class Profile extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(),
+                                Profile.class));
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.notification:
                         startActivity(new Intent(getApplicationContext(),
@@ -97,4 +96,15 @@ public class Profile extends AppCompatActivity {
         });
 
     }
+    public boolean checkField(EditText textField){
+        if(textField.getText().toString().isEmpty()){
+            textField.setError("Error");
+            valid = false;
+        }else {
+            valid = true;
+        }
+
+        return valid;
+    }
+
 }

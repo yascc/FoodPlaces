@@ -35,15 +35,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Favorite" />
-        <activity android:name=".Notification" />
-        <activity android:name=".Directory" />
-        <activity android:name=".Profile" />
         <activity android:name=".ProfileSettings" />
-        <activity android:name=".MainActivity"/>
         <activity android:name=".Register"/>
         <activity android:name=".Login"/>
-        </activity>
     </application>
 
 </manifest>
