@@ -77,7 +77,7 @@
             tools:layout_editor_absoluteY="304dp">
 
             <Button
-                android:id="@+id/gotoLogin"
+                android:id="@+id/goToLogin"
                 android:layout_width="408dp"
                 android:layout_height="60dp"
                 android:text="Login"
@@ -88,7 +88,7 @@
                 android:layout_width="407dp"
                 android:layout_height="63dp"
                 android:text="Create Account"
-                app:layout_constraintTop_toBottomOf="@+id/gotoLogin" />
+                app:layout_constraintTop_toBottomOf="@+id/goToLogin" />
 
         </LinearLayout>
 

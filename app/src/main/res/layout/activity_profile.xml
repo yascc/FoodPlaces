@@ -57,7 +57,7 @@
             android:background="@color/colorPrimary" />
 
         <Button
-            android:id="@+id/gotoLogin"
+            android:id="@+id/goToLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login" />

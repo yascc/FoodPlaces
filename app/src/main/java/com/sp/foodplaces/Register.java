@@ -43,7 +43,7 @@ public class Register extends AppCompatActivity {
         password = findViewById(R.id.registerPassword);
         phone = findViewById(R.id.registerPhone);
         registerBtn = findViewById(R.id.registerBtn);
-        goToLogin = findViewById(R.id.gotoLogin);
+        goToLogin = findViewById(R.id.goToLogin);
 
         //Initialize and Assign Variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
