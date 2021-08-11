@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    style="@style/CardView.Light"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp">
+
+    <ImageView
+        android:id="@+id/favImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:src="@drawable/thumbnail_place_01"
+        android:scaleType="centerCrop"/>
+
+    <TextView
+        android:id="@+id/favTextView"
+        style="@style/TextAppearance.AppCompat.Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="110dp"
+        android:text="Place Name" />
+
+    <TextView
+        android:id="@+id/favRatingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rating"
+        android:layout_marginTop="34dp"
+        android:layout_marginStart="110dp"/>
+
+    <TextView
+        android:id="@+id/favAddressTextView"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        android:layout_marginTop="54dp"
+        android:layout_marginStart="110dp"/>
+
+    <ImageButton
+        android:id="@+id/favBtn"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:background="@drawable/ic_baseline_favorite_red"
+        android:layout_gravity="center|end"
+        android:layout_marginEnd="8dp"/>
+
+</androidx.cardview.widget.CardView>

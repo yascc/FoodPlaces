@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--item.xml-->
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    style="@style/CardView.Light"
+    app:cardCornerRadius="8dp"
+    android:elevation="3dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginTop="8dp">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/thumbnail_place_01"/>
+
+    <TextView
+        android:id="@+id/titleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Place Name"
+        android:textColor="#fff"
+        style="@style/TextAppearance.AppCompat.Title"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginTop="16dp"/>
+
+    <TextView
+        android:id="@+id/ratingTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Rating"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginTop="42dp"
+        />
+
+    <TextView
+        android:id="@+id/addressTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:text="Address"
+        android:textColor="#fff"
+        android:textStyle="bold"
+        android:layout_marginStart="18dp"
+        android:layout_marginBottom="18dp"
+        android:layout_marginTop="60dp"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="bottom|end"
+        android:layout_marginEnd="18dp"
+        android:layout_marginBottom="18dp">
+
+        <ImageButton
+            android:id="@+id/favBtn"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:background="@drawable/ic_baseline_favorite_shadow" />
+
+
+    </LinearLayout>
+
+
+</androidx.cardview.widget.CardView>
