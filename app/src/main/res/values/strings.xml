@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Food Places</string>
     <string name="title_activity_maps">Map</string>
-    <string name="enable_geofences">Enable alerts of good places nearby</string>
+    <string name="enable_geofences">Enable alerts of good places</string>
     <string name="settings_label">Notification Settings</string>
     <string name="setting_enabled" translatable="false">EnabledSetting</string>
     <string name="places_api_key">AIzaSyA_rieN35yjtAgOq5rM3kulLH58vpUM8jk</string>

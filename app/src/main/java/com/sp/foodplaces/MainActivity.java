@@ -58,6 +58,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -84,14 +85,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             for(Location location: locationResult.getLocations()){
                 lastKnownLocation = location;
 
-                if (firstLoad == false){
+                if (firstLocation == false){
                     if (lastKnownLocation != null){
                         map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastKnownLocation.getLatitude(),
                                 lastKnownLocation.getLongitude()), CloseZoom));
+
+                        runGeofence();
                     }
                 }
 
-                firstLoad = true;
+                firstLocation = true;
             }
         }
     };
@@ -101,7 +104,10 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     private Button buttonFind;
 
-    private Boolean firstLoad = false;
+    private Boolean firstLocation = false;
+    private  Boolean firstGeofence = false;
+
+    public static ArrayList<ModelGeoPlaces> wongPlacesList;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -134,6 +140,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         AutocompleteSessionToken token = AutocompleteSessionToken.newInstance();
 
         buttonFind = findViewById(R.id.bt_Find);
+
+        //Yasmine
 
         if (ContextCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -313,7 +321,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             compassLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
             compassLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_END);
             compassLayoutParams.addRule(RelativeLayout.ALIGN_PARENT_START, 0);
-            compassLayoutParams.topMargin = 240;
+            compassLayoutParams.topMargin = 280;
             compassLayoutParams.rightMargin = 20;
 
             View locationButton = ((View) mapView.findViewById(Integer.parseInt("1")).getParent()).findViewById(Integer.parseInt("2"));
@@ -427,6 +435,77 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                 map.addMarker(options);
                 map.animateCamera(CameraUpdateFactory.zoomTo(NearbyZoom));
+            }
+        }
+    }
+
+    private void runGeofence() {
+
+        if(lastKnownLocation!=null){
+            String geofenceURL = "https://maps.googleapis.com/maps/api/place/nearbysearch/json" +
+                    "?location=" + lastKnownLocation.getLatitude() + "," + lastKnownLocation.getLongitude() +
+                    "&radius=3000" +
+                    "&types=restaurant" +
+                    "&sensor=true" +
+                    "&key=" + apiKey;
+
+            new searchGeofence().execute(geofenceURL);
+        }else{
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    runGeofence();
+                }
+            },2000);
+        }
+    }
+
+    private class searchGeofence extends AsyncTask<String,Integer,String>{
+        @Override
+        protected String doInBackground(String... strings) {
+            String data = null;
+            try {
+                URLParser urlParser = new URLParser();
+                data = urlParser.getURL(strings[0]);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return data;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            new parseGeofenceData().execute(s);
+        }
+    }
+
+    private class parseGeofenceData extends AsyncTask<String,Integer,List<HashMap<String,String>>>{
+        @Override
+        protected List<HashMap<String,String>> doInBackground(String... strings) {
+            URLParser mURLParser = new URLParser();
+            List<HashMap<String,String>> geofenceList = null;
+            JSONObject mObject = null;
+            try {
+                mObject = new JSONObject(strings[0]);
+                geofenceList = mURLParser.parseResult(mObject);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            return geofenceList;
+        }
+
+        @Override
+        protected void onPostExecute(List<HashMap<String,String>> hashMaps) {
+            //map.clear();
+            for(int i =0;i<hashMaps.size();i++){
+                HashMap<String,String> mHashMap = hashMaps.get(i);
+                double lat = Double.parseDouble(mHashMap.get("lat"));
+                double lng = Double.parseDouble(mHashMap.get("lng"));
+                String name = mHashMap.get("name");
+
+                wongPlacesList = new ArrayList<>();
+                wongPlacesList.add(new ModelGeoPlaces(name, lat, lng));
             }
         }
     }
