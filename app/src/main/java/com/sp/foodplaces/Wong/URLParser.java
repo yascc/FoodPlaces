@@ -35,6 +35,12 @@ public class URLParser {
             //name
             String json_name = jsonObject.getString("name");
 
+            //place_id
+            String json_placeID = jsonObject.getString("place_id");
+
+            //address
+            String json_address = jsonObject.getString("vicinity");
+
             //location
             String json_lat = jsonObject.getJSONObject("geometry").getJSONObject("location").getString("lat");
             String json_lng = jsonObject.getJSONObject("geometry").getJSONObject("location").getString("lng");
@@ -47,10 +53,10 @@ public class URLParser {
                 String finalRating = String.format("%.1f", douRating);
                 if (jsonObject.has("user_ratings_total")) {
                     String json_user_ratings = jsonObject.getString("user_ratings_total");
-                    json_rating = finalRating + "/5" + "  (" + json_user_ratings + ")";
+                    json_rating = finalRating + "/5 Stars" + "  (" + json_user_ratings + ")";
                     hashMap.put("rating",json_rating);
                 }else {
-                    json_rating = finalRating + "/5" + "(0)";
+                    json_rating = finalRating + "/5 Stars" + "(0)";
                     hashMap.put("rating", json_rating);
                 }
             } else hashMap.put("rating","Rating: NA");
@@ -95,6 +101,8 @@ public class URLParser {
 
             //hashmap put
             hashMap.put("name",json_name);
+            hashMap.put("placeID",json_placeID);
+            hashMap.put("address",json_address);
             hashMap.put("lat",json_lat);
             hashMap.put("lng",json_lng);
 

@@ -14,6 +14,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.ArrayList;
 
 public class FavPlaceAdaptor extends RecyclerView.Adapter<FavPlaceAdaptor.ViewHolder> {
@@ -48,7 +50,12 @@ public class FavPlaceAdaptor extends RecyclerView.Adapter<FavPlaceAdaptor.ViewHo
         final ModelFavPlaceItem favItem = modelFavPlaceItems.get(position);
 
         readCursorData(favItem, holder);
-        holder.imageView.setImageResource(favItem.getImageResourse());
+
+        if (modelFavPlaceItems.get(position).getImageResourse() != null){
+            Glide.with(context).load(modelFavPlaceItems.get(position).getImageResourse()).into(holder.imageView);
+        }
+
+        //holder.imageView.setImageResource(favItem.getImageResourse());
         holder.titleTextView.setText(favItem.getTitle());
         holder.ratingTextView.setText(favItem.getRating());
         holder.addressTextView.setText(favItem.getAddress());
@@ -92,6 +99,8 @@ public class FavPlaceAdaptor extends RecyclerView.Adapter<FavPlaceAdaptor.ViewHo
                                 modelFavPlaceItem.getRating(),
                                 modelFavPlaceItem.getAddress(),
                                 modelFavPlaceItem.getKey_id(),
+                                modelFavPlaceItem.getFavStatus(),
+                                //modified to match new db insert format
                                 modelFavPlaceItem.getFavStatus());
                         favBtn.setBackgroundResource(R.drawable.ic_baseline_favorite_red);
                     }

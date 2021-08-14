@@ -33,10 +33,12 @@ public class FavFragment extends Fragment {
         favDirectoryRV.setLayoutManager(new LinearLayoutManager(getActivity()));
 
         //TODO: UPDATE WITH WONG's ARRAY
+        /*
         modelFavPlaceItems.add(new ModelFavPlaceItem(R.drawable.thumbnail_place_01, "Genki Sushi","0","181 Orchard Rd, #04-30 Central, Orchard, Singapore 238896","4.2 Stars", "0"));
         modelFavPlaceItems.add(new ModelFavPlaceItem(R.drawable.thumbnail_place_02, "Blue Label","1","333A Orchard Road, #03-02 Mandarin Gallery, 238897", "4.3 Stars", "0"));
         modelFavPlaceItems.add(new ModelFavPlaceItem(R.drawable.thumbnail_place_03, "Al Capone's Ristorante & Bar","2","2 Orchard Link, #02-38 Scape Building, Singapore 237978", "3.2 Stars", "0"));
-        
+        */
+
         return root;
     }
     

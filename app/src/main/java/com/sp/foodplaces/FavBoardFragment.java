@@ -51,10 +51,11 @@ public class FavBoardFragment extends Fragment {
         try {
             while (cursor.moveToNext()) {
                 String title = cursor.getString(cursor.getColumnIndex(FavoriteDB.ITEM_TITLE));
-                String id = cursor.getString(cursor.getColumnIndex(FavoriteDB.KEY_ID));
+                //Wong: replace key_id with placeID
+                String id = cursor.getString(cursor.getColumnIndex(FavoriteDB.ITEM_PLACEID));
                 String rating = cursor.getString(cursor.getColumnIndex(FavoriteDB.ITEM_RATING));
                 String address = cursor.getString(cursor.getColumnIndex(FavoriteDB.ITEM_ADDRESS));
-                int image = Integer.parseInt(cursor.getString(cursor.getColumnIndex(FavoriteDB.ITEM_IMAGE)));
+                String image = cursor.getString(cursor.getColumnIndex(FavoriteDB.ITEM_IMAGE));
                 ModelFavItem modelFavItem = new ModelFavItem(title, id, rating, address, image);
                 modelFavItemList.add(modelFavItem);
             }

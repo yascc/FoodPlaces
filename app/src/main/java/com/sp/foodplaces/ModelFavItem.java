@@ -3,14 +3,14 @@ package com.sp.foodplaces;
 public class ModelFavItem {
     private String item_title;
     private String key_id;
-    private int item_image;
+    private String item_image;
     private String item_rating;
     private String item_address;
 
     public ModelFavItem() {
     }
 
-    public ModelFavItem(String item_title, String key_id, String item_rating, String item_address, int item_image) {
+    public ModelFavItem(String item_title, String key_id, String item_rating, String item_address, String item_image) {
         this.item_title = item_title;
         this.key_id = key_id;
         this.item_rating = item_rating;
@@ -50,11 +50,11 @@ public class ModelFavItem {
         this.item_address = item_address;
     }
 
-    public int getItem_image() {
+    public String getItem_image() {
         return item_image;
     }
 
-    public void setItem_image(int item_image) {
+    public void setItem_image(String item_image) {
         this.item_image = item_image;
     }
 }

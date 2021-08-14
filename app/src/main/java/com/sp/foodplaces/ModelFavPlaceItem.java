@@ -2,7 +2,7 @@ package com.sp.foodplaces;
 
 public class ModelFavPlaceItem {
 //coffeeItem
-    private int imageResourse;
+    private String imageResourse;
     private String title;
     private String key_id;
     private String address;
@@ -12,7 +12,7 @@ public class ModelFavPlaceItem {
     public ModelFavPlaceItem() {
     }
 
-    public ModelFavPlaceItem(int imageResourse, String title, String key_id, String address, String rating, String favStatus) {
+    public ModelFavPlaceItem(String imageResourse, String title, String key_id, String address, String rating, String favStatus) {
         this.imageResourse = imageResourse;
         this.title = title;
         this.key_id = key_id;
@@ -21,11 +21,11 @@ public class ModelFavPlaceItem {
         this.favStatus = favStatus;
     }
 
-    public int getImageResourse() {
+    public String getImageResourse() {
         return imageResourse;
     }
 
-    public void setImageResourse(int imageResourse) {
+    public void setImageResourse(String imageResourse) {
         this.imageResourse = imageResourse;
     }
 

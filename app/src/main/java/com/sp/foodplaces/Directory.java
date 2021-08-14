@@ -39,8 +39,10 @@ import java.util.List;
 
 public class Directory extends AppCompatActivity {
 
-    List<PlaceModel> placeModelList;
+    ArrayList<PlaceModel> placeModelList;
     RecyclerView recyclerView;
+
+    final DirectoryLoading loading = new DirectoryLoading(Directory.this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,8 +53,8 @@ public class Directory extends AppCompatActivity {
         placeModelList = new ArrayList<>();
         recyclerView = findViewById(R.id.recycler_view);
 
-        final DirectoryLoading loading = new DirectoryLoading(Directory.this);
         loading.startLoading();
+        /*
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
@@ -60,6 +62,8 @@ public class Directory extends AppCompatActivity {
                 loading.endLoading();
             }
         },1000);
+
+         */
 
         GetData getData = new GetData();
         getData.execute();
@@ -173,15 +177,21 @@ public class Directory extends AppCompatActivity {
                 placeModel.setRating(hashMap.get("rating"));
                 placeModel.setPrice(hashMap.get("price"));
                 placeModel.setPhoto(hashMap.get("photoID"));
+                placeModel.setAddress(hashMap.get("address"));
+                placeModel.setPlaceID(hashMap.get("placeID"));
+                placeModel.setFav("0");
 
                 placeModelList.add(placeModel);
+
+            //PutDataToRecycleView(placeModelList);
+            loading.endLoading();
             }
 
             PutDataToRecycleView(placeModelList);
         }
     }
 
-    private void PutDataToRecycleView(List<PlaceModel> placeModelList){
+    private void PutDataToRecycleView(ArrayList<PlaceModel> placeModelList){
         PlaceAdapter placeAdapter = new PlaceAdapter(this, placeModelList);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(placeAdapter);

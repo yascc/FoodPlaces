@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
+
 import java.util.List;
 
 public class FavAdaptor extends RecyclerView.Adapter<FavAdaptor.ViewHolder>{
@@ -37,7 +39,10 @@ public class FavAdaptor extends RecyclerView.Adapter<FavAdaptor.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.favTextView.setText(modelFavItemList.get(position).getItem_title());
-        holder.favImageView.setImageResource(modelFavItemList.get(position).getItem_image());
+        if (modelFavItemList.get(position).getItem_image() != null){
+            Glide.with(context).load(modelFavItemList.get(position).getItem_image()).into(holder.favImageView);
+        }
+        //holder.favImageView.setImageResource(modelFavItemList.get(position).getItem_image());
         holder.favAddressTextView.setText(modelFavItemList.get(position).getItem_address());
         holder.favRatingTextView.setText(modelFavItemList.get(position).getItem_rating());
     }
@@ -70,7 +75,6 @@ public class FavAdaptor extends RecyclerView.Adapter<FavAdaptor.ViewHolder>{
                 public void onClick(View view) {
                     int position = getAdapterPosition();
                     final ModelFavItem modelFavItem = modelFavItemList.get(position);
-
                     favDB.remove_fav(modelFavItem.getKey_id());
                     removeItem(position);
                 }
