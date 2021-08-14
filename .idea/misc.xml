@@ -3,8 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/Wong TF/Desktop/School/Sem 5/ET0893_Mobile_Applications_Development/Final Project/app/src/main/res/layout/activity_directory.xml" value="0.1078125" />
-        <entry key="..\:/Users/Wong TF/Desktop/School/Sem 5/ET0893_Mobile_Applications_Development/Final Project/app/src/main/res/layout/directory_placelist.xml" value="0.44919786096256686" />
+        <entry key="..\:/Users/admin/Desktop/SP/03.ET0893 MOBILE APPLICATIONS DEVELOPMENT/Projects/FoodPlaces/app/src/main/res/layout/activity_favorite.xml" value="0.24322916666666666" />
+        <entry key="..\:/Users/admin/Desktop/SP/03.ET0893 MOBILE APPLICATIONS DEVELOPMENT/Projects/FoodPlaces/app/src/main/res/layout/activity_login.xml" value="0.24322916666666666" />
+        <entry key="..\:/Users/admin/Desktop/SP/03.ET0893 MOBILE APPLICATIONS DEVELOPMENT/Projects/FoodPlaces/app/src/main/res/layout/activity_profile.xml" value="0.24322916666666666" />
+        <entry key="..\:/Users/admin/Desktop/SP/03.ET0893 MOBILE APPLICATIONS DEVELOPMENT/Projects/FoodPlaces/app/src/main/res/layout/activity_register.xml" value="0.24322916666666666" />
+        <entry key="..\:/Users/admin/Desktop/SP/03.ET0893 MOBILE APPLICATIONS DEVELOPMENT/Projects/FoodPlaces/app/src/main/res/layout/activity_test.xml" value="0.24322916666666666" />
       </map>
     </option>
   </component>

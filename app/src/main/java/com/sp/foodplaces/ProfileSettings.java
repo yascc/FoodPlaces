@@ -24,7 +24,7 @@ public class ProfileSettings extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_profile);
+        setContentView(R.layout.activity_profilesettings);
         this.setTitle("Profile Settings");
 
 
@@ -69,7 +69,7 @@ public class ProfileSettings extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.discovery:
                         startActivity(new Intent(getApplicationContext(),
-                                MapsActivity.class));
+                                MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.directory:
@@ -83,6 +83,9 @@ public class ProfileSettings extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(),
+                                Profile.class));
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.notification:
                         startActivity(new Intent(getApplicationContext(),

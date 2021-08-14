@@ -37,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent"
             android:background="#C3FF5722"
             android:padding="1dp"
-            android:src="@drawable/ic_baseline_notifications"
+            app:srcCompat="@drawable/ic_baseline_notifications"
             app:tint="@color/white" />
 
 <!--        <LinearLayout

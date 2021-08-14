@@ -11,7 +11,6 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.api.Context;
 
 public class Profile extends AppCompatActivity {
     boolean valid = true;
@@ -25,34 +24,8 @@ public class Profile extends AppCompatActivity {
         this.setTitle("Profile");
 
         goToRegister = findViewById(R.id.gotoRegister);
-        goToLogin = findViewById(R.id.gotoLogin);
+        goToLogin = findViewById(R.id.goToLogin);
         goToGuest = findViewById(R.id.goToGuest);
-
-
-        goToRegister.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),Register.class));
-                //finish();
-            }
-        });
-
-        goToLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),Login.class));
-                //finish();
-            }
-        });
-
-        goToGuest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                finish();
-            }
-        });
-
 
         //Initialize and Assign Variable
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -81,9 +54,6 @@ public class Profile extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:
-                        startActivity(new Intent(getApplicationContext(),
-                                Profile.class));
-                        overridePendingTransition(0,0);
                         return true;
                     case R.id.notification:
                         startActivity(new Intent(getApplicationContext(),
@@ -94,6 +64,30 @@ public class Profile extends AppCompatActivity {
                 return false;
             }
         });
+
+        goToLogin.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),Login.class));
+                finish();
+            }
+        });
+
+        goToGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                //finish();
+            }
+        });
+/*
+        goToRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(getApplicationContext(),Register.class));
+            }
+        });
+*/
 
     }
     public boolean checkField(EditText textField){

@@ -38,6 +38,7 @@
         <activity android:name=".ProfileSettings" />
         <activity android:name=".Register"/>
         <activity android:name=".Login"/>
+        activity android:name=".Test"/>
     </application>
 
 </manifest>

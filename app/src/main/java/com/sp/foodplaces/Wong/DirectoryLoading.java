@@ -1,17 +1,18 @@
 package com.sp.foodplaces.Wong;
 
-import android.app.Activity;
-import android.app.AlertDialog;
 import android.view.LayoutInflater;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.sp.foodplaces.R;
 
 public class DirectoryLoading {
 
-    private Activity activity;
+    private AppCompatActivity activity;
     private AlertDialog dialog;
 
-    public DirectoryLoading(Activity activity){
+    public DirectoryLoading(AppCompatActivity activity){
         this.activity = activity;
     }
 
