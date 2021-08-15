@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
         android:allowBackup="true"
@@ -16,29 +17,43 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FoodPlaces">
 
+        <receiver
+            android:name=".GeofenceBroadcastReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBGjTcUuWYaBPiTqWmHJuyjqn5PYT976kk"/>
 
-        <activity android:name=".Favorite"></activity>
-        <activity android:name=".Notification" />
+        <!--<activity android:name=".Favorite"></activity>-->
+
         <activity
             android:name=".Directory"
             android:theme="@style/Theme.FoodPlaces.Full"/>
-        <activity android:name=".Profile" />
+
         <activity
             android:name=".MainActivity"
-            android:theme="@style/Theme.FoodPlaces.Full" >
+            android:theme="@style/Theme.FoodPlaces.Full"
+            android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Favorite" />
+        <activity android:name=".Notification" />
+        <activity android:name=".Profile" />
         <activity android:name=".ProfileSettings" />
         <activity android:name=".Register"/>
         <activity android:name=".Login"/>
-        activity android:name=".Test"/>
+        <activity android:name=".Test"/>
     </application>
 
 </manifest>

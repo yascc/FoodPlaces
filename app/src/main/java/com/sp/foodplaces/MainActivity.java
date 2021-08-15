@@ -8,15 +8,18 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Location;
 import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -26,6 +29,8 @@ import android.widget.Toast;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.GeofencingClient;
+import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationResult;
@@ -38,6 +43,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -64,17 +70,24 @@ import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MainActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
     public static final String apiKey = "AIzaSyBGjTcUuWYaBPiTqWmHJuyjqn5PYT976kk";
 
-    private GoogleMap map;
+    private static GoogleMap map;
     private View mapView;
 
     private FusedLocationProviderClient locationProviderClient;
     private LocationRequest locationRequest;
     public static LatLng lastSearchLatLng;
     public static Location lastKnownLocation;
+
+    private static GeofencingClient geofencingClient;
+    private GeofenceHelper geofenceHelper;
+    public static ArrayList<ModelGeoPlaces> geoPlacesList;
+
+    private int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;
+    private static final String TAG = "MapsActivityOnMain";
 
     private LocationCallback locationCallback = new LocationCallback() {
         @Override
@@ -107,13 +120,14 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private Boolean firstLocation = false;
     private  Boolean firstGeofence = false;
 
-    public static ArrayList<ModelGeoPlaces> wongPlacesList;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
         //Wong
         //Set full screen with status bar on
@@ -142,7 +156,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         buttonFind = findViewById(R.id.bt_Find);
 
         //Yasmine
-
         if (ContextCompat.checkSelfPermission(MainActivity.this,
                 Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 200);
@@ -173,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         return true;
                     case R.id.profile:
                         startActivity(new Intent(getApplicationContext(),
-                                Profile.class));
+                                ProfileSettings.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.notification:
@@ -185,6 +198,11 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 return false;
             }
         });
+
+
+        geofencingClient = LocationServices.getGeofencingClient(this);
+        geofenceHelper = new GeofenceHelper(this);
+
 
         //Initialize autocomplete fragment for search bar
         AutocompleteSupportFragment autocompleteFragment = (AutocompleteSupportFragment)
@@ -236,7 +254,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         break;
                     default:dayOfWeek=null;
                 }
-                
+
                 String searchHours = null;
 
                 if (!tmpHours.getWeekdayText().equals(null)){
@@ -294,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
         super.onStart();
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) ==
                 PackageManager.PERMISSION_GRANTED) {
-                            checkLocationRequest();
+            checkLocationRequest();
         } else {
             askLocationPermission();
         }
@@ -335,6 +353,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             map.moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(lastKnownLocation.getLatitude(),
                     lastKnownLocation.getLongitude()), CloseZoom));
         }
+
+        map.setOnMapLongClickListener(this);
     }
 
     private void askLocationPermission() {
@@ -495,18 +515,137 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             return geofenceList;
         }
 
+        //TODO : WONG ARRAY
         @Override
         protected void onPostExecute(List<HashMap<String,String>> hashMaps) {
             //map.clear();
+            geoPlacesList = new ArrayList<>();
+
             for(int i =0;i<hashMaps.size();i++){
                 HashMap<String,String> mHashMap = hashMaps.get(i);
                 double lat = Double.parseDouble(mHashMap.get("lat"));
                 double lng = Double.parseDouble(mHashMap.get("lng"));
                 String name = mHashMap.get("name");
+                geoPlacesList.add(new ModelGeoPlaces(name, lat, lng));
+            }
 
-                wongPlacesList = new ArrayList<>();
-                wongPlacesList.add(new ModelGeoPlaces(name, lat, lng));
+            for (int b=0; b<geoPlacesList.size(); b++) {
+                Log.d(TAG, "onPostExecute: geoPlaces: gList: " + geoPlacesList.get(b).getId()
+                        + " " + geoPlacesList.get(b).getLatitude());
             }
         }
     }
+
+    @Override
+    public void onMapLongClick(LatLng latLng) {
+        if (Build.VERSION.SDK_INT >= 29) {
+            //we need BG permission
+            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION) ==
+                    PackageManager.PERMISSION_GRANTED) {
+
+                tryAddingGeofence();
+
+            } else {
+
+                if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_BACKGROUND_LOCATION)) {
+                    //we show dialog and ask for permission
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission
+                            .ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
+                } else {
+                    ActivityCompat.requestPermissions(this, new String[]{Manifest.permission
+                            .ACCESS_BACKGROUND_LOCATION}, BACKGROUND_LOCATION_ACCESS_REQUEST_CODE);
+                }
+            }
+        } else {
+            tryAddingGeofence();
+        }
+    }
+
+    private void tryAddingGeofence() {
+        map.clear();
+
+        for (ModelGeoPlaces geoplace : geoPlacesList) {
+            // Read the place information from the DB cursor
+            String placeUID = geoplace.getId();
+            LatLng latLng = new LatLng(geoplace.getLatitude(), geoplace.getLongitude());
+            addMarker(latLng);
+            //!--TODO: radius from user setting
+            addCircle(latLng, GeofenceHelper.getGeofenceRadius());
+            addGeofence(latLng, GeofenceHelper.getGeofenceRadius());
+            Log.d(TAG, "tryAddingGeofence: testList " + placeUID);
+        }
+
+        for (int i=0; i<geoPlacesList.size(); i++) {
+            Log.d(TAG, "tryAddingGeofence: geoPlaces: gList: " + geoPlacesList.get(i).getId()
+                    + " " + geoPlacesList.get(i).getLatitude());
+        }
+
+    }
+
+    private void addGeofence(LatLng latLng, float radius) {
+        //pass in GEOFENCE request ID
+
+        /*Geofence geofence = geofenceHelper.getGeofence(GEOFENCE_ID, latLng, radius, Geofence
+                .GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL | Geofence.GEOFENCE_TRANSITION_EXIT);*/
+
+        //TODO: add geofence vlue in bracket?
+        GeofencingRequest geofencingRequest = geofenceHelper.getGeofencingRequest();
+
+        PendingIntent pendingIntent = geofenceHelper.getPendingIntent();
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return;
+        }
+
+        geofencingClient.addGeofences(geofencingRequest, pendingIntent)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Log.d(TAG, "onSuccess: Geofence Added...");
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        String errorMessage = geofenceHelper.getErrorString(e);
+                        Log.d(TAG, "onFailure: " + errorMessage);
+                    }
+                });
+
+    }
+
+    private void addMarker(LatLng latLng) {
+        MarkerOptions markerOptions = new MarkerOptions().position(latLng);
+        map.addMarker(markerOptions);
+    }
+
+    private void addCircle(LatLng latLng, float radius){
+        CircleOptions circleOptions = new CircleOptions();
+        circleOptions.center(latLng);
+        circleOptions.radius(radius);
+        circleOptions.strokeColor(Color.argb(255,255,0,0));
+        circleOptions.fillColor(Color.argb(64,255,0,0));
+        circleOptions.strokeWidth(4);
+        map.addCircle(circleOptions);
+    }
+
+    public static ArrayList<ModelGeoPlaces> getGeoPlacesList() {
+        return geoPlacesList;
+    }
+
+    public static GeofencingClient getGeofencingClient(){
+        return geofencingClient;
+    }
+
+    public static GoogleMap getMap() {
+        return map;
+    }
+
 }
