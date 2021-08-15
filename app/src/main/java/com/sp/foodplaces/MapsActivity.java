@@ -48,12 +48,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     //private ActivityMapsBinding binding;
 
     private UiSettings mUiSettings;
+
     private static GeofencingClient geofencingClient;
     private GeofenceHelper geofenceHelper;
+    public static ArrayList<ModelGeoPlaces> geoPlacesList;
 
     //emulator location settings on diff api: https://github.com/android/location-samples/issues/161
 
-    public static ArrayList<ModelGeoPlaces> geoPlacesList;
 
     private int FINE_LOCATION_ACCESS_REQUEST_CODE = 10001;
     private int BACKGROUND_LOCATION_ACCESS_REQUEST_CODE = 10002;

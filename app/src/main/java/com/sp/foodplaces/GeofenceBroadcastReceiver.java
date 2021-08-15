@@ -62,7 +62,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
         switch (transitionType) {
             case Geofence.GEOFENCE_TRANSITION_ENTER:
                 //Toast.makeText(context, "GEOFENCE_TRANSITION_ENTER", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification(EnterGeofenceTitle, NotificationBody5SNear, MapsActivity.class);
+                notificationHelper.sendHighPriorityNotification(EnterGeofenceTitle, NotificationBody5SNear, MainActivity.class);
                 //NotificationFragment.getNotificationsList();
 
                 String pTimeEnter = time();
@@ -73,7 +73,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
                 break;
             case Geofence.GEOFENCE_TRANSITION_DWELL:
                 //Toast.makeText(context, "GEOFENCE_TRANSITION_DWELL", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification(DwellGeofenceTitle, NotificationBody5SDwell, MapsActivity.class);
+                notificationHelper.sendHighPriorityNotification(DwellGeofenceTitle, NotificationBody5SDwell, MainActivity.class);
 
                 String pTimeDwell = time();
 
@@ -82,7 +82,7 @@ public class GeofenceBroadcastReceiver extends BroadcastReceiver {
                 break;
             case Geofence.GEOFENCE_TRANSITION_EXIT:
                 //Toast.makeText(context, "GEOFENCE_TRANSITION_EXIT", Toast.LENGTH_SHORT).show();
-                notificationHelper.sendHighPriorityNotification(ExitGeofenceTitle, NotificationBody5SFurther, MapsActivity.class);
+                notificationHelper.sendHighPriorityNotification(ExitGeofenceTitle, NotificationBody5SFurther, MainActivity.class);
 
                 String pTimeExit = time();
 

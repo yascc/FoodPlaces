@@ -57,15 +57,11 @@ public class GeofenceHelper extends ContextWrapper{
         GEOFENCE_RADIUS = geofenceRadius;
     }
 
-    /*
-    public static float getGeofenceTimeout() {
-        return GEOFENCE_TIMEOUT;
-    }*/
-
     public static void registerAllGeofences() {
+        //TODO: check list here
         mGeofenceList = new ArrayList<>();
 
-        for (ModelGeoPlaces geoplace : MapsActivity.getGeoPlacesList()) {
+        for (ModelGeoPlaces geoplace : MainActivity.getGeoPlacesList()) {
             // Read the place information from the DB cursor
             String placeUID = geoplace.getId();
             double placeLat = geoplace.getLatitude();
@@ -93,9 +89,9 @@ public class GeofenceHelper extends ContextWrapper{
 
     public static void unRegisterAllGeofences(){
         try {
-            MapsActivity.getmMap().clear();
+            MainActivity.getMap().clear();
             mGeofenceList.clear();
-            MapsActivity.getGeofencingClient().removeGeofences(geofencePendingIntent);
+            MainActivity.getGeofencingClient().removeGeofences(geofencePendingIntent);
         } catch (SecurityException securityException) {
             // Catch exception generated if the app does not use ACCESS_FINE_LOCATION permission.
             Log.e(TAG, securityException.getMessage());
@@ -103,22 +99,16 @@ public class GeofenceHelper extends ContextWrapper{
     }
 
 
+
    public GeofencingRequest getGeofencingRequest() {
         GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
-        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
+       //TODO: fix array list here?
         builder.addGeofences(mGeofenceList);
+        builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
         return builder.build();
     }
 
     //!=====
-    //Can also create list of geofence here with addGeofence
-/*    public GeofencingRequest getGeofencingRequest(Geofence geofence){
-        return new GeofencingRequest.Builder()
-                .addGeofence(geofence)
-                .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
-                .build();
-    }*/
-
     public Geofence getGeofence(String ID, LatLng latLng, float radius, int transitionTypes) {
         return new Geofence.Builder()
                 .setCircularRegion(latLng.latitude, latLng.longitude, radius)

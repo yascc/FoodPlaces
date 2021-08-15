@@ -33,15 +33,6 @@ public class AdaptorNotification extends RecyclerView.Adapter<AdaptorNotificatio
     public HolderNotification onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         //inflate view row_notification
 
- /*       View view = LayoutInflater.from(context).inflate(
-                R.layout.row_notification,
-                parent, false);
-                return new HolderNotification(view);*/
-
-/*        LayoutInflater layoutInflater = LayoutInflater.from(parent.getContext());
-        View view = layoutInflater.inflate(R.layout.row_notification, parent, false);
-        HolderNotification viewHolder = new HolderNotification(view);
-        return viewHolder;*/
         View view = LayoutInflater.from(parent.getContext()).inflate(
                 R.layout.row_notification,
                 parent, false);
@@ -56,25 +47,6 @@ public class AdaptorNotification extends RecyclerView.Adapter<AdaptorNotificatio
         holder.notificationBodyTV.setText(notificationsList.get(position).getNotification());
         holder.notificationTimeTV.setText(notificationsList.get(position).getTimestamp());
 
-
-/*      //get and set data to views
-        //get data
-        ModelNotification model = notificationsList.get(position);
-        String title = model.getTitle();
-        String notification = model.getNotification();
-        String timestamp = model.getTimestamp();
-
-        //convert timestamp to dd/mm/yy hh:mm am/pm
-        Calendar calendar = Calendar.getInstance(Locale.getDefault());
-        calendar.setTimeInMillis(Long.parseLong(timestamp));
-        SimpleDateFormat DateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm aa");
-        String pTime = DateFormat.toString();
-        //String pTime = DateFormat.format("dd/MM/yyyy hh:mm aa", calendar).toString();
-
-        //set to views
-        holder.notificationTitleTV.setText(title);
-        holder.notificationBodyTV.setText(notification);
-        holder.notificationTimeTV.setText(pTime);*/
     }
 
     @Override

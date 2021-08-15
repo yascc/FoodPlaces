@@ -40,11 +40,8 @@ public class NotificationFragment extends Fragment {
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
-
         super.setUserVisibleHint(isVisibleToUser);
-
         // Refresh tab data:
-
         if (getFragmentManager() != null) {
 
             getFragmentManager()
