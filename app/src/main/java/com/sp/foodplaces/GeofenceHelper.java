@@ -92,6 +92,13 @@ public class GeofenceHelper extends ContextWrapper{
             MainActivity.getMap().clear();
             mGeofenceList.clear();
             MainActivity.getGeofencingClient().removeGeofences(geofencePendingIntent);
+
+            Log.d(TAG, "unRegisterAllGeofences success");
+            for (int i=0; i<mGeofenceList.size(); i++) {
+                Log.d(TAG, "unRegisterAllGeofences: gList: " + mGeofenceList.get(i).getRequestId()
+                        + " " + mGeofenceList.get(i).toString());
+            }
+
         } catch (SecurityException securityException) {
             // Catch exception generated if the app does not use ACCESS_FINE_LOCATION permission.
             Log.e(TAG, securityException.getMessage());
@@ -102,7 +109,6 @@ public class GeofenceHelper extends ContextWrapper{
 
    public GeofencingRequest getGeofencingRequest() {
         GeofencingRequest.Builder builder = new GeofencingRequest.Builder();
-       //TODO: fix array list here?
         builder.addGeofences(mGeofenceList);
         builder.setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER);
         return builder.build();
@@ -152,4 +158,10 @@ public class GeofenceHelper extends ContextWrapper{
         return e.getLocalizedMessage();
     }
 
+    public static List<Geofence> getmGeofenceList() {
+        return mGeofenceList;
+    }
+
 }
+
+

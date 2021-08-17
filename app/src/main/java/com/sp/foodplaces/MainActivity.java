@@ -29,6 +29,7 @@ import android.widget.Toast;
 import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.Geofence;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.GeofencingRequest;
 import com.google.android.gms.location.LocationCallback;
@@ -354,7 +355,8 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     lastKnownLocation.getLongitude()), CloseZoom));
         }
 
-        map.setOnMapLongClickListener(this);
+            map.setOnMapLongClickListener(this);
+
     }
 
     private void askLocationPermission() {
@@ -569,7 +571,6 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
             String placeUID = geoplace.getId();
             LatLng latLng = new LatLng(geoplace.getLatitude(), geoplace.getLongitude());
             addMarker(latLng);
-            //!--TODO: radius from user setting
             addCircle(latLng, GeofenceHelper.getGeofenceRadius());
             addGeofence(latLng, GeofenceHelper.getGeofenceRadius());
             Log.d(TAG, "tryAddingGeofence: testList " + placeUID);
@@ -585,10 +586,9 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
     private void addGeofence(LatLng latLng, float radius) {
         //pass in GEOFENCE request ID
 
-        /*Geofence geofence = geofenceHelper.getGeofence(GEOFENCE_ID, latLng, radius, Geofence
-                .GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL | Geofence.GEOFENCE_TRANSITION_EXIT);*/
-
-        //TODO: add geofence vlue in bracket?
+       /* Geofence geofence = geofenceHelper.getGeofence(geoPlacesList.getId(), latLng, radius, Geofence
+                .GEOFENCE_TRANSITION_ENTER | Geofence.GEOFENCE_TRANSITION_DWELL | Geofence.GEOFENCE_TRANSITION_EXIT);
+*/
         GeofencingRequest geofencingRequest = geofenceHelper.getGeofencingRequest();
 
         PendingIntent pendingIntent = geofenceHelper.getPendingIntent();
