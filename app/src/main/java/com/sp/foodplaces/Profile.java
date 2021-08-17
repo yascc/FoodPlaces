@@ -84,7 +84,7 @@ public class Profile extends AppCompatActivity {
             }
         });
 /*
-        // TODO: Test note
+        // TODO: Register
         goToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
