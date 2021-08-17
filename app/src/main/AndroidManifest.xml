@@ -54,6 +54,8 @@
         <activity android:name=".Register"/>
         <activity android:name=".Login"/>
         <activity android:name=".Test"/>
+
+        <activity android:name=".Directory_WebView"/>
     </application>
 
 </manifest>

@@ -39,6 +39,7 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
 import com.google.android.gms.location.SettingsClient;
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -355,7 +356,16 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                     lastKnownLocation.getLongitude()), CloseZoom));
         }
 
-            map.setOnMapLongClickListener(this);
+        map.setOnCameraMoveStartedListener(new GoogleMap.OnCameraMoveStartedListener(){
+            @Override
+            public void onCameraMoveStarted(int i) {
+                if (i == GoogleMap.OnCameraMoveStartedListener.REASON_GESTURE){
+                    buttonFind.setVisibility(View.VISIBLE);
+                }
+            }
+        });
+
+        map.setOnMapLongClickListener(this);
 
     }
 
@@ -456,8 +466,19 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                 options.title(name);
                 options.icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED));
                 map.addMarker(options);
-                map.animateCamera(CameraUpdateFactory.zoomTo(NearbyZoom));
             }
+
+            CameraUpdate searchLocation = CameraUpdateFactory.newLatLngZoom(lastSearchLatLng, NearbyZoom);
+            map.animateCamera(searchLocation, new GoogleMap.CancelableCallback(){
+                @Override
+                public void onFinish() {
+                    buttonFind.setVisibility(View.INVISIBLE);
+                }
+                @Override
+                public void onCancel() {
+
+                }
+            });
         }
     }
 

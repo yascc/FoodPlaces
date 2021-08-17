@@ -1,27 +1,28 @@
 package com.sp.foodplaces.Wong;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
-import com.sp.foodplaces.FavAdaptor;
 import com.sp.foodplaces.FavoriteDB;
 import com.sp.foodplaces.R;
+import com.sp.foodplaces.Directory_WebView;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder> {
     private Context context;
@@ -52,7 +53,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlaceAdapter.MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull PlaceAdapter.MyViewHolder holder, @SuppressLint("RecyclerView") int position) {
 
         final PlaceModel placeModel = placeModelList.get(position);
         readCursorData(placeModel, holder);
@@ -65,6 +66,16 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
         if (placeModelList.get(position).getPhoto() != null){
             Glide.with(context).load(placeModelList.get(position).getPhoto()).into(holder.photo);
         }
+
+        //Webview
+        holder.parentLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, Directory_WebView.class);
+                intent.putExtra("name", placeModelList.get(position).getName());
+                context.startActivity(intent);
+            }
+        });
     }
 
     @Override
@@ -77,6 +88,7 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
         TextView name, rating, price, address;
         ImageView photo;
         ImageButton favBtn;
+        RelativeLayout parentLayout;
 
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -87,6 +99,8 @@ public class PlaceAdapter extends RecyclerView.Adapter<PlaceAdapter.MyViewHolder
             address = itemView.findViewById(R.id.place_address);
             photo = itemView.findViewById(R.id.place_photo);
             favBtn = itemView.findViewById(R.id.place_favBtn);
+
+            parentLayout = itemView.findViewById(R.id.parent_layout);
 
 
             //add to fav btn
