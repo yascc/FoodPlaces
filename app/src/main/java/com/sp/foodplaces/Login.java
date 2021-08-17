@@ -140,6 +140,8 @@ public class Login extends AppCompatActivity {
         return valid;
     }
 
+   // Test
+/*
     @Override
     protected void onStart() {
         super.onStart();
@@ -148,7 +150,7 @@ public class Login extends AppCompatActivity {
             startActivity(new Intent(getApplicationContext(),MainActivity.class));
         }
     }
-
+*/
 
 
 }

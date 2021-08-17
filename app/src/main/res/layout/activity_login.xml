@@ -15,29 +15,37 @@
             android:id="@+id/loginEmail"
             android:layout_width="387dp"
             android:layout_height="58dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="12dp"
             android:ems="10"
             android:hint="Email Address"
             android:inputType="textEmailAddress"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="30dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
             android:id="@+id/loginPassword"
             android:layout_width="387dp"
             android:layout_height="60dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
-            tools:layout_editor_absoluteX="12dp"
-            tools:layout_editor_absoluteY="96dp" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginEmail" />
 
         <Button
             android:id="@+id/loginBtn"
             android:layout_width="match_parent"
             android:layout_height="61dp"
+            android:layout_marginTop="20dp"
             android:text="Login"
-            tools:layout_editor_absoluteX="2dp"
-            tools:layout_editor_absoluteY="176dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginPassword" />
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
@@ -57,27 +65,33 @@
             android:id="@+id/gotoRegister"
             android:layout_width="match_parent"
             android:layout_height="64dp"
+            android:layout_marginTop="24dp"
             android:text="Create Account"
-            tools:layout_editor_absoluteX="3dp"
-            tools:layout_editor_absoluteY="261dp" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/loginBtn" />
 
-        <View
-            android:id="@+id/view2"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_above="@id/bottom_navigation"
-            android:background="@drawable/shadow"
-            tools:layout_editor_absoluteY="664dp" />
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/linearLayout"
-            android:layout_width="413dp"
-            android:layout_height="143dp"
-            android:layout_marginBottom="173dp"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@+id/view2">
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="413dp"
+                android:layout_height="143dp"
+                android:orientation="vertical"
+                tools:layout_editor_absoluteY="348dp">
 
-        </LinearLayout>
+            </LinearLayout>
+
+            <View
+                android:id="@+id/view2"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:layout_above="@id/bottom_navigation"
+                android:background="@drawable/shadow"
+                tools:layout_editor_absoluteY="664dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
