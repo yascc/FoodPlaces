@@ -9,10 +9,10 @@
     <string name="title_directory">Directory</string>
     <string name="title_favorite">Favorite</string>
     <string name="contact">For any enquiries, please refer to any personnel below:
-    <br/><br/>Sandy Lim (P7358666)
-    <br/>Marcus Ong (P7358775)
-    <br/>Wong Thien Fong (P7358097)
-    <br/>Yasmine Cheng (P7358507)</string>
+    \n\nSandy Lim (P7358666)
+    \nMarcus Ong (P7358775)
+    \nWong Thien Fong (P7358097)
+    \nYasmine Cheng (P7358507)</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

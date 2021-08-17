@@ -58,7 +58,7 @@ public class Register extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.discovery:
                         startActivity(new Intent(getApplicationContext(),
-                                MapsActivity.class));
+                                MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.directory:

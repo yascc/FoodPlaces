@@ -40,7 +40,7 @@ public class Profile extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.discovery:
                         startActivity(new Intent(getApplicationContext(),
-                                MapsActivity.class));
+                                MainActivity.class));
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.directory:
@@ -83,15 +83,14 @@ public class Profile extends AppCompatActivity {
                 finish();
             }
         });
-/*
-        // TODO: Register
-        goToRegister.setOnClickListener(new View.OnClickListener() {
+
+        // TODO: test
+        /*goToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),Register.class));
             }
-        });
-*/
+        });*/
     }
     public boolean checkField(EditText textField){
         if(textField.getText().toString().isEmpty()){
