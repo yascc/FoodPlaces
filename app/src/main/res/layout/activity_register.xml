@@ -69,28 +69,32 @@
             app:layout_constraintTop_toBottomOf="@+id/registerPassword" />
 
         <Button
-            android:id="@+id/goToLogin"
+            android:id="@+id/registerBtn"
             android:layout_width="408dp"
             android:layout_height="60dp"
-            android:text="Login"
+            android:text="Create Account"
             app:layout_constraintTop_toBottomOf="@+id/registerPhone"
-            tools:layout_editor_absoluteX="5dp" />
+            tools:layout_editor_absoluteX="5dp"
+            tools:layout_editor_absoluteY="448dp" />
 
         <Button
-            android:id="@+id/registerBtn"
+            android:id="@+id/goToLogin"
             android:layout_width="407dp"
             android:layout_height="63dp"
-            android:text="Create Account"
-            app:layout_constraintTop_toBottomOf="@+id/goToLogin"
-            tools:layout_editor_absoluteX="5dp" />
+            android:text="Login"
+            app:layout_constraintTop_toBottomOf="@+id/registerBtn"
+            tools:layout_editor_absoluteY="345dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="-182dp">
 
 
             <View
+                android:id="@+id/view3"
                 android:layout_width="match_parent"
                 android:layout_height="10dp"
                 android:layout_above="@id/bottom_navigation"
