@@ -13,7 +13,7 @@ import android.widget.EditText;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Profile extends AppCompatActivity {
-    boolean valid = true;
+    boolean valid = false;
     private static final String TAG = "Profile";
     Button goToRegister,goToLogin,goToGuest;
 
@@ -36,7 +36,7 @@ public class Profile extends AppCompatActivity {
         //Perform ItemSelectedListener
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+            public boolean onNavigationItemSelected(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.discovery:
                         startActivity(new Intent(getApplicationContext(),
@@ -54,6 +54,9 @@ public class Profile extends AppCompatActivity {
                         overridePendingTransition(0,0);
                         return true;
                     case R.id.profile:
+                        startActivity(new Intent(getApplicationContext(),
+                                Profile.class));
+                        overridePendingTransition(0,0);
                         return true;
                     case R.id.notification:
                         startActivity(new Intent(getApplicationContext(),
@@ -77,17 +80,16 @@ public class Profile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                //finish();
+                finish();
             }
         });
-/*
+
         goToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),Register.class));
             }
         });
-*/
 
     }
     public boolean checkField(EditText textField){

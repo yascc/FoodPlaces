@@ -186,7 +186,7 @@ public class MainActivity extends AppCompatActivity implements OnMapReadyCallbac
                         return true;
                     case R.id.profile:
                         startActivity(new Intent(getApplicationContext(),
-                                ProfileSettings.class));
+                                Profile.class));
                         overridePendingTransition(0, 0);
                         return true;
                     case R.id.notification:
