@@ -83,14 +83,15 @@ public class Profile extends AppCompatActivity {
                 finish();
             }
         });
-
+/*
+        // TODO: Test note
         goToRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(getApplicationContext(),Register.class));
             }
         });
-
+*/
     }
     public boolean checkField(EditText textField){
         if(textField.getText().toString().isEmpty()){
